@@ -18,3 +18,6 @@
   |  カラム  |  type  |
   | ---- | ---- |
   |  type  | string  |
+
+## ヘロクのタスクデプロイ方法
+ git push heroku step2:masterをターミナルに打ち込んでデプロイする
