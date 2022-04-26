@@ -1,13 +1,13 @@
 <h1>Task.index</h1>
 <table>
   <% @task.each do |task| %>
-    <tr>
+    <tr class="task_row">
       <td><%= task.title %></td>
       <td><%= task.content %></td>
-      <td><%= link_to '内容を確認',task_path(task.id) %></td>
-      <td><%= link_to '編集する',edit_task_path(task.id) %></td>
-      <td><%= link_to '削除する',task_path(task.id), method: :delete ,data: { confirm:'削除しますか？'} %></td>
+      <td><%= link_to t('view.show'),task_path(task.id) %></td>
+      <td><%= link_to t('view.edit'),edit_task_path(task.id) %></td>
+      <td><%= link_to t('view.destroy'),task_path(task.id), method: :delete ,data: { confirm:'削除しますか？'} %></td>
     </tr>
   <% end %>
 </table>
-<%= link_to '登録する', new_task_path %>
+<%= link_to t('view.create'), new_task_path %>
