@@ -6,7 +6,7 @@ class TasksController < ApplicationController
 
   def index
     if params[:sort_expired] == nil
-      @task = Task.all
+      @task = Task.order(created_at: "DESC")
     else
       @task = Task.order(deadline: :DESC)
     end
