@@ -7,6 +7,7 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired] == nil
       @task = Task.order(created_at: "DESC")
+      @task = @task.where('title LIKE ?', "%#{params[:search]}") if params[:search].present?
     else
       @task = Task.order(deadline: :DESC)
     end
@@ -48,6 +49,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit %i( title content deadline )
+    params.require(:task).permit %i( title content deadline status )
   end
 end

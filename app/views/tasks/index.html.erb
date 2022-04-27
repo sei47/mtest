@@ -1,5 +1,11 @@
 <h1>Task.index</h1>
   <%= link_to t('view.sort_desc'), tasks_path(sort_expired: "true") %>
+
+  <%= form_with(url: tasks_path, method: :get, local: true) do |form| %>
+    <%= form.text_field :search %>
+    <%= form.submit 'Search', title: nil %>
+  <% end %>
+
 <table>
   <tr>
     <th>タイトル</th>
@@ -11,6 +17,7 @@
       <td><%= task.title %></td>
       <td><%= task.content %></td>
       <td><%= task.deadline %></td>
+      <td><%= task.status %></td>
       <td><%= link_to t('view.show'),task_path(task.id) %></td>
       <td><%= link_to t('view.edit'),edit_task_path(task.id) %></td>
       <td><%= link_to t('view.destroy'),task_path(task.id), method: :delete ,data: { confirm:'削除しますか？'} %></td>
