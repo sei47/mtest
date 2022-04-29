@@ -8,6 +8,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task[title]', with:'task_test'
         fill_in 'task[content]', with:'task_test'
         fill_in 'task_deadline', with: '2022/04/13'
+        select '未着手', from: 'task[status]'
         click_on '登録する'
         expect(page).to have_content 'task'
       end
@@ -38,6 +39,35 @@ RSpec.describe 'タスク管理機能', type: :system do
         task_list = all('.task_row')
         test_list = Task.order(deadline: :DESC)
         expect(task_list[0]).to eq test_list[0]
+      end
+    end
+  end
+  describe '検索機能' do
+    before do
+      FactoryBot.create(:task, title: "test")
+      FactoryBot.create(:second_task)
+    end
+    context 'タイトルで曖昧検索した場合' do
+      it '検索キーワードを含むタスクで絞り込める' do
+        visit tasks_path
+        fill_in 'title_search', with:'test'
+        click_on 'Search'
+        expect(page).to have_content 'test'
+      end
+    end
+    context 'ステータス検索した場合' do
+      it '完全一致するタスクで絞り込める' do
+        visit tasks_path
+        select '未着手', from: 'status_search'
+        expect(page).to have_content '未着手'
+      end
+    end
+    context 'タイトルの曖昧検索とステータス検索をした場合' do
+      it '検索キーワードを含み、ステータスに完全一致するタスクで絞り込める' do
+        visit tasks_path
+        fill_in 'title_search', with:'test'
+        select '未着手', from: 'status_search'
+        expect(page).to have_content 'test'
       end
     end
   end
