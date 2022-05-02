@@ -1,11 +1,16 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+
   def new
     @task = Task.new
   end
 
   def index
-    @task = Task.all.order(created_at: "DESC")
+    @tasks = Task.order(created_at: "DESC")
+    @tasks = Task.order(deadline: :DESC) if params[:sort_expired].present?
+    @tasks = Task.order_by_priority if params[:sort_priority].present?
+    @tasks = @tasks.search(params[:title_search], params[:status_search]) if params[:title_search].present? or params[:status_search].present?
+    @tasks = @tasks.page(params[:page]).per(5)
   end
 
   def create
@@ -44,6 +49,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit %i( title content )
+    params.require(:task).permit %i( title content deadline status priority )
   end
 end

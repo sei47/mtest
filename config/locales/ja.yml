@@ -211,3 +211,6 @@ ja:
     edit: 編集する
     destroy: 削除する
     create: 登録する
+    sort_desc: 終了期限
+    sort_priority: 優先度
+    search: 検索
