@@ -2,7 +2,13 @@ class Task < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
   validates :deadline, presence: true
-
+  enum priority: { 高: 0,中: 1,低: 2 }
+  priority_order = [0, 1, 2]
+  scope :order_by_priority, -> {
+      order_by = []
+      priority_order.each { |priority| order_by << "priority=#{priority} DESC" }
+      order(order_by.join(", "))
+  }
   def self.search(title_search, status_search)
     if title_search.present? and status_search.present?
       @task = Task.where('title LIKE ?', "%#{title_search}").where('status LIKE ?', "#{status_search}")

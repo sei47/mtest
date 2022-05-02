@@ -9,6 +9,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task[content]', with:'task_test'
         fill_in 'task_deadline', with: '2022/04/13'
         select '未着手', from: 'task[status]'
+        select '高', from: 'task[priority]'
         click_on '登録する'
         expect(page).to have_content 'task'
       end
@@ -35,7 +36,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'ソートボタンを押した場合' do
       it "期限が降順で表示される" do
         visit tasks_path
-        click_on '降順並べ替え'
+        click_on '終了期限'
         task_list = all('.task_row')
         test_list = Task.order(deadline: :DESC)
         expect(task_list[0]).to eq test_list[0]
@@ -68,6 +69,15 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'title_search', with:'test'
         select '未着手', from: 'status_search'
         expect(page).to have_content 'test'
+      end
+    end
+    context '優先順位でソートしたとき' do
+      it '優先度が高い順にソートされる' do
+        visit tasks_path
+        task_list = all('.task_row')
+        click_on '優先度'
+        test_list = all('.task_row')
+        expect(task_list[0]).to eq test_list[0]
       end
     end
   end
