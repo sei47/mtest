@@ -1,5 +1,12 @@
-<%= @task.title %>
-<%= @task.content %>
-<%= @task.deadline %>
-<%= @task.status %>
-<%= link_to t('view.index_back'), tasks_path %>
+<h1>詳細</h1>
+<div class="container">
+  <div class="row">
+    <div class="new_and_edit">
+      <%= @task.title %>
+      <%= @task.content %>
+      <%= @task.deadline %>
+      <%= @task.status %>
+      <%= link_to t('view.index_back'), tasks_path %>
+    </div>
+  </div>
+</div>

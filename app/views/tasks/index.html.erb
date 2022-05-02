@@ -1,4 +1,4 @@
-<h1>Task.index</h1>
+<h1>タスク一覧</h1>
 
 <div class="container">
   <div class="row">
@@ -7,8 +7,11 @@
       <%= form.text_field :title_search %>
       <%= form.label :ステータス %>
       <%= form.select :status_search ,[["",""],["未着手","未着手"],["着手中","着手中"],["完了","完了"]] %>
-      <%= form.submit 'Search'%>
+      <%= form.submit t('view.search')%>
 
+      <div class="new_button btn-primary btn">
+        <%= link_to t('view.create'), new_task_path,class: "create" %>
+      </div>
     <table>
       <tr>
         <th>タイトル</th>
@@ -25,16 +28,13 @@
           <td><%= task.deadline %></td>
           <td><%= task.status %></td>
           <td><%= task.priority %></td>
-          <td><%= link_to t('view.show'),task_path(task.id) %></td>
-          <td><%= link_to t('view.edit'),edit_task_path(task.id) %></td>
-          <td><%= link_to t('view.destroy'),task_path(task.id), method: :delete ,data: { confirm:'削除しますか？'} %></td>
+          <td class="button"><%= link_to t('view.show'),task_path(task.id), class: "btn btn-outline-primary" %></td>
+          <td class="button"><%= link_to t('view.edit'),edit_task_path(task.id), class: "btn btn-outline-success" %></td>
+          <td class="button"><%= link_to t('view.destroy'),task_path(task.id), method: :delete ,data: { confirm:'削除しますか？'}, class: "btn btn-outline-danger" %></td>
         </tr>
       <% end %>
     </table>
 
     <%= paginate(@tasks) %>
   </div>
-</div>
-<div class="new_button btn-primary btn">
-  <%= link_to t('view.create'), new_task_path %>
 </div>

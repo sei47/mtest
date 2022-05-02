@@ -52,7 +52,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '検索キーワードを含むタスクで絞り込める' do
         visit tasks_path
         fill_in 'title_search', with:'test'
-        click_on 'Search'
+        click_on '検索'
         expect(page).to have_content 'test'
       end
     end

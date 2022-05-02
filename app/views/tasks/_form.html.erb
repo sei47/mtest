@@ -10,23 +10,30 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
-
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-
+  </div>
+  <div class="text">
+  <%= form.label :content %>
+  <%= form.text_area :content %>
+  </div>
+  <div class="field">
     <%= form.label :期限 %>
     <%= form.date_field :deadline %>
-
+  </div>
+  <div class="field">
     <%= form.label :ステータス %>
     <%= form.select :status ,[["未着手","未着手"],["着手中","着手中"],["完了","完了"]] %>
-
+  </div>
+  <div class="field">
     <%= form.label :優先度 %>
     <%= form.select :priority ,[["高","高"],["中","中"],["低","低"]] %>
+  </div>
 
+  <div class="actions">
     <%= form.submit %>
+  </div>
 <% end %>
 
 <%= link_to t('view.index_back'), tasks_path %>

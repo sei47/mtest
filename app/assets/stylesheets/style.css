@@ -1,0 +1,80 @@
+.container{
+  min-height: 100%;
+  position: relative;
+  background: #f0f8ff;
+}
+
+.form{
+   display:block;
+   text-align: right;
+   width: 50%;
+}
+
+.home{
+  background-color: #c0c0c0;
+  border: 1px solid black;
+}
+
+.text{
+  background: #f0f8ff;
+  text-align: center;
+}
+
+.controll{
+  font-size: 1rem;
+  background-color: #f0f8ff;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.user{
+  width: 100%;
+  text-align: center;
+  font-size: 5rem;
+  background-color: #f0f8ff;
+}
+.user_speace{
+  height: 5rem;
+}
+
+.create{
+  color: white;
+}
+
+.new_and_edit{
+  background-color: #c0c0c0;
+  border: 1px solid black;
+  text-align: center;
+}
+
+form{
+  width: 100%;
+}
+table{
+  width: 100%;
+}
+
+tr{
+  border-bottom: 1px solid;
+}
+
+.new_and_edit h1{
+  color: #90ee90;
+}
+
+.back{
+  background-color: white;
+  border: thick double #32a1ce;
+}
+
+.link{
+  font-size: 2rem;
+}
+
+.button{
+  width: 10%;
+}
+
+.row{
+  text-align: center;
+}
