@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <table class="user">
+      <th><%= @user.name %>のぺージ</th>
+      <tr class="user_speace">
+        <td class="link">メールアドレス:<%= @user.email %></td>
+      </tr>
+      <td class="link">
+        <%= link_to t('view.index_back'), tasks_path %>|
+      </td>
+    </table>
+  </div>
+</div>
