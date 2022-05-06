@@ -2,6 +2,8 @@ class Task < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
   validates :deadline, presence: true
+  belongs_to :user
+  
   enum priority: { 高: 0,中: 1,低: 2 }
   priority_order = [0, 1, 2]
   scope :order_by_priority, -> {
