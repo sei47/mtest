@@ -1,10 +1,31 @@
 <div class="container">
   <div class="row">
-    <table class="user">
+    <table>
       <th><%= @user.name %>のぺージ</th>
       <tr class="user_speace">
         <td class="link">メールアドレス:<%= @user.email %></td>
       </tr>
+    </table>
+    <table>
+      <tr>
+        <th>タイトル</th>
+        <th>内容</th>
+        <th><%= t('view.sort_desc') %></th>
+        <th>状態</th>
+        <th><%= t('view.sort_priority') %></th>
+      </tr>
+      <% @tasks.each do |task| %>
+        <tr class="task_row">
+          <td><%= task.title %></td>
+          <td><%= task.content %></td>
+          <td><%= task.deadline %></td>
+          <td><%= task.status %></td>
+          <td><%= task.priority %></td>
+          <td class="button"><%= link_to t('view.show'),task_path(task.id), class: "btn btn-outline-primary" %></td>
+          <td class="button"><%= link_to t('view.edit'),edit_task_path(task.id), class: "btn btn-outline-success" %></td>
+          <td class="button"><%= link_to t('view.destroy'),task_path(task.id), method: :delete ,data: { confirm:'削除しますか？'}, class: "btn btn-outline-danger" %></td>
+        </tr>
+      <% end %>
       <td class="link">
         <%= link_to t('view.index_back'), tasks_path %>|
       </td>
