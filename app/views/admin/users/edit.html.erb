@@ -1,6 +1,6 @@
 <h1>ユーザー編集</h1>
 
-<%= form_with(model: @user, local: true) do |f| %>
+<%= form_with(url: admin_user_path(@user.id), model: @user, local: true) do |f| %>
 
   <%= f.label :name %>
   <%= f.text_field :name %>

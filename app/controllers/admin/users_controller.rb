@@ -23,26 +23,33 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
+    if @user.update(update_user_params)
       redirect_to admin_users_path
     else
-      render new
+      redirect_to edit_admin_user_path(@user.id)
     end
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice: "削除しました"
+    if @user.destroy
+      redirect_to admin_users_path, notice: "削除しました"
+    else
+      redirect_to admin_users_path, notice: "削除できませんでした"
+    end
   end
 
   private
 
   def admin_check?
-    render tasks_path unless current_user.admin_flag
+    redirect_to tasks_path unless current_user.admin_flag
   end
 
   def user_params
     params.require(:user).permit %i( name email password password_confirmation admin_flag )
+  end
+
+  def update_user_params
+    params.require(:user).permit %i( name email admin_flag )
   end
 
   def set_user
