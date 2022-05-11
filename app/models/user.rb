@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :email, presence: true
 
   before_update :block_admin_absence
+  before_destroy :block_admin_absence
   has_secure_password
   has_many :tasks, dependent: :destroy
 
