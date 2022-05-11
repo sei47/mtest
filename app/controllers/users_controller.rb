@@ -18,14 +18,17 @@ class UsersController < ApplicationController
   end
 
   def show
-    @tasks = Task.where(user_id: @user.id)
+    if current_user.id == User.find_by(id: @user).id or current_user.admin_flag
+      @tasks = Task.where(user_id: @user.id)
+    else
+      redirect_to tasks_path
+    end
   end
 
   def edit
   end
 
   def update
-
   end
 
   private
@@ -41,5 +44,4 @@ class UsersController < ApplicationController
   def session_now
     redirect_to tasks_path if current_user
   end
-
 end

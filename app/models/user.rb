@@ -11,6 +11,8 @@ class User < ApplicationRecord
   private
 
   def block_admin_absence
-    throw(:abort) unless User.where(admin_flag: true).where.not(id: self.id).present?
+    unless self.admin_flag
+      throw(:abort) unless User.where(admin_flag: true).where.not(id: self.id).present?
+    end
   end
 end
