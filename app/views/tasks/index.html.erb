@@ -14,6 +14,7 @@
       </div>
     <table>
       <tr>
+        <th>ユーザー名</th>
         <th>タイトル</th>
         <th>内容</th>
         <th><%= link_to t('view.sort_desc'), tasks_path(sort_expired: "true") %></th>
@@ -24,6 +25,7 @@
       <% @tasks.each do |task| %>
         <% if current_user.id == User.find_by(id: task.user_id).id%>
           <tr class="task_row">
+            <td><%= task.user.name %></td>
             <td><%= task.title %></td>
             <td><%= task.content %></td>
             <td><%= task.deadline %></td>
