@@ -1,4 +1,3 @@
 class Label < ApplicationRecord
-  belongs_to :user
-  belongs_to :task
+  has_many :marks, through: :marks, dependent: :destroy
 end
