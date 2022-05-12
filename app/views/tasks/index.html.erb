@@ -31,6 +31,9 @@
             <td><%= task.deadline %></td>
             <td><%= task.status %></td>
             <td><%= task.priority %></td>
+            <% @tasks.each do |label| %>
+              <td><%= label.name %></td>
+            <% end %>
             <td class="button"><%= link_to t('view.show'),task_path(task.id), class: "btn btn-outline-primary" %></td>
             <td class="button"><%= link_to t('view.edit'),edit_task_path(task.id), class: "btn btn-outline-success" %></td>
             <td class="button"><%= link_to t('view.destroy'),task_path(task.id), method: :delete ,data: { confirm:'削除しますか？'}, class: "btn btn-outline-danger" %></td>
