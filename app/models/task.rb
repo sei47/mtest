@@ -13,13 +13,17 @@ class Task < ApplicationRecord
       priority_order.each { |priority| order_by << "priority=#{priority} DESC" }
       order(order_by.join(", "))
   }
-  def self.search(title_search, status_search)
-    if title_search.present? and status_search.present?
-      @task = Task.where('title LIKE ?', "%#{title_search}").where('status LIKE ?', "#{status_search}")
+  def self.search(title_search, status_search, label_id)
+    if title_search.present? and status_search.present? and label_id.present?
+      @tasks = Task.where('title LIKE ?', "%#{title_search}").where('status LIKE ?', "#{status_search}")
     elsif title_search.present?
-      @task = Task.where('title LIKE ?', "%#{title_search}")
+      @tasks = Task.where('title LIKE ?', "%#{title_search}")
     elsif status_search.present?
-      @task = Task.where('status LIKE ?', "#{status_search}")
+      @tasks = Task.where('status LIKE ?', "#{status_search}")
+    elsif label_id.present?
+      mark = Mark.all.includes(:task)
+      mark = mark.where(label_id: label_id)
+      @tasks = Task.where(id: mark.pluck(:task_id))
     end
   end
 end

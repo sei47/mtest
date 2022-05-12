@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     @tasks = Task.order(created_at: "DESC")
     @tasks = Task.order(deadline: :DESC) if params[:sort_expired].present?
     @tasks = Task.order_by_priority if params[:sort_priority].present?
-    @tasks = @tasks.search(params[:title_search], params[:status_search]) if params[:title_search].present? or params[:status_search].present?
+    @tasks = @tasks.search(params[:title_search], params[:status_search], params[:label_id]) if params[:title_search].present? or params[:status_search].present? or params[:label_id].present?
     @tasks = @tasks.page(params[:page]).per(5)
   end
 
