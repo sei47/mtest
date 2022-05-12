@@ -33,7 +33,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to tasks_path, notice: "更新しました"
     else
-      render :new
+      render :edit
     end
   end
 
@@ -49,6 +49,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit %i( title content deadline status priority )
+    params.require(:task).permit(:title, :content, :deadline, :status, :priority, {label_ids: []} )
   end
 end

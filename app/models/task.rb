@@ -3,7 +3,8 @@ class Task < ApplicationRecord
   validates :content, presence: true
   validates :deadline, presence: true
   belongs_to :user
-  has_many :marks, through: :marks, dependent: :destroy
+  has_many :marks, dependent: :destroy
+  has_many :labels, through: :marks
 
   enum priority: { 高: 0,中: 1,低: 2 }
   priority_order = [0, 1, 2]
