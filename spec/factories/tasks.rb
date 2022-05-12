@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :task do
+    association :user
     title { 'test_title' }
     content { 'test_content' }
     deadline { '2022/04/13' }
@@ -9,7 +10,8 @@ FactoryBot.define do
   factory :second_task, class: Task do
     title { 'Factoryで作ったデフォルトのタイトル２' }
     content { 'Factoryで作ったデフォルトのコンテント２' }
-    deadline { '2022/04/13' }
-    status { '低' }
+    deadline { '2022/04/18' }
+    status { '未着手' }
+    priority { '高' }
   end
 end

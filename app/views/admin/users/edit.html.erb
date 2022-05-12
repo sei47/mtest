@@ -1,0 +1,15 @@
+<h1>ユーザー編集</h1>
+
+<%= form_with(url: admin_user_path(@user.id), model: @user, local: true) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+
+  <%= f.label :管理者権限 %>
+  <%= f.select :admin_flag ,[["有","true"],["無","false"]] %>
+
+  <%= f.submit t('view.create_my_account') %>
+<% end %>
