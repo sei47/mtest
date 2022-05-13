@@ -24,6 +24,15 @@ RSpec.describe 'ラベル機能', type: :system do
       end
     end
   end
+  describe '詳細表示機能' do
+     context '任意のタスク詳細画面に遷移した場合' do
+       it '該当タスクに紐付したラベルが表示される' do
+         visit task_path(@task.id)
+         expect(page).to have_content 'label_test'
+       end
+     end
+  end
+
   describe '編集機能' do
     context '作成済みタスクのラベルを編集した場合' do
       it '編集したラベルが一覧に表示される' do
