@@ -1,12 +1,27 @@
 <h1>詳細</h1>
 <div class="container">
   <div class="row">
-    <div class="new_and_edit">
-      <%= @task.title %>
-      <%= @task.content %>
-      <%= @task.deadline %>
-      <%= @task.status %>
+    <table>
+      <tr>
+        <th>ユーザー名</th>
+        <th>タイトル</th>
+        <th>内容</th>
+        <th><%= t('view.sort_desc') %></th>
+        <th>状態</th>
+        <th><%= t('view.sort_priority') %></th>
+        <th>ラベル</th>
+      </tr>
+      <tr class="task_row">
+        <td><%= @task.title %></td>
+        <td><%= @task.content %></td>
+        <td><%= @task.deadline %></td>
+        <td><%= @task.status %></td>
+        <td>
+          <% @task.labels.each do |label| %>
+            <%= label.name %>
+          <% end %>
+        </td>
+      </tr>
       <%= link_to t('view.index_back'), tasks_path %>
-    </div>
   </div>
 </div>

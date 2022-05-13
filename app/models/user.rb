@@ -7,7 +7,6 @@ class User < ApplicationRecord
   before_destroy :block_admin_absence_destroy
   has_secure_password
   has_many :tasks, dependent: :destroy
-
   private
 
   def block_admin_absence_edit

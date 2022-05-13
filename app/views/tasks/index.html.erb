@@ -7,6 +7,7 @@
       <%= form.text_field :title_search %>
       <%= form.label :ステータス %>
       <%= form.select :status_search ,[["",""],["未着手","未着手"],["着手中","着手中"],["完了","完了"]] %>
+      <%= form.select :label_id, Label.all.collect {|label| [ label.name, label.id ]}, include_blank: true %>
       <%= form.submit t('view.search')%>
 
       <div class="new_button btn-primary btn">
@@ -20,6 +21,7 @@
         <th><%= link_to t('view.sort_desc'), tasks_path(sort_expired: "true") %></th>
         <th>状態</th>
         <th><%= link_to t('view.sort_priority'), tasks_path(sort_priority: "true") %></th>
+        <th>ラベル</th>
       </tr>
     <% end %>
       <% @tasks.each do |task| %>
@@ -31,6 +33,11 @@
             <td><%= task.deadline %></td>
             <td><%= task.status %></td>
             <td><%= task.priority %></td>
+            <td>
+              <% task.labels.each do |label| %>
+                <%= label.name %>
+              <% end %>
+            </td>
             <td class="button"><%= link_to t('view.show'),task_path(task.id), class: "btn btn-outline-primary" %></td>
             <td class="button"><%= link_to t('view.edit'),edit_task_path(task.id), class: "btn btn-outline-success" %></td>
             <td class="button"><%= link_to t('view.destroy'),task_path(task.id), method: :delete ,data: { confirm:'削除しますか？'}, class: "btn btn-outline-danger" %></td>
